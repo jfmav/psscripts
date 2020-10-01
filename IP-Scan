@@ -4,7 +4,7 @@
 .DESCRIPTION
  Scan IP-Addresses 
  Test-Connection with one attemed 
- output a list with "IP,Ping(true or false), Source (if it possible DNS query)
+ output a list with "IP,Ping(true or false)
 
 
 .NOTES
