@@ -1,4 +1,15 @@
-#Excel must be installed on the machine
+<#
+.SYNOPSIS
+    auto Convert Excel to CSV
+.DESCRIPTION
+Open Excel over ComObject --> Excel must be installed on Machine
+
+.NOTES
+    Name:        Set-XlsxToCsv.ps1
+    Author:      JFmav
+    Created:     2020-10-09
+    Version:     0.3
+#>
 
 function SET-EXCELFiletoCSV {
 param($xlsxfilepath,$xlsxSheetName,$csvfilepath)
