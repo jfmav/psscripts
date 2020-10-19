@@ -17,8 +17,8 @@
 # * Definitions                                                                   *
 # *********************************************************************************
 $ipstart="172.16."
-[int]$ipoctet3start=60
-[int]$ipoctet3end=61
+[int]$ipoctet3start=0
+[int]$ipoctet3end=0
 [int]$ipoctet4start=1
 [int]$ipoctet4end=254
 # *********************************************************************************
