@@ -18,7 +18,7 @@ DateUpdated: 2019-11-13
 # * Depenencies                                                                   *
 # *********************************************************************************
 $ComputerName=$env:COMPUTERNAME
-$csv_path="C:\ATMAPEIAUSTRIA_ITDATA\Inventur\"
+$csv_path="C:\ScriptData\Inventur\"
 $csv_path_HW=$csv_path + $ComputerName + "_" + "HW_Inventory_WmiData.csv"
 $csv_path_SW=$csv_path + $ComputerName + "_" + "SW_Inventory_RegData.csv"
 if (!(Test-Path -Path $csv_path)) { New-Item -ItemType directory -Path $csv_path }
