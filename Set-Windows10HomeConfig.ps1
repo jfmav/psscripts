@@ -107,7 +107,6 @@ Write-Host ""
 Write-Host ""
 
 #Disable:Scheduled Tasks
-eventlog -status "INFO" -message "Windows10 OSConfig Disable ScheduledTasks" -EventlogName $NameEventlog -EventlogSource $NameEventSource
 #.
 Disable-ScheduledTask -TaskName "\Microsoft\Windows\Autochk\Proxy" | Out-Null
 Disable-ScheduledTask -TaskName "\Microsoft\Windows\Maintenance\WinSAT" | Out-Null
@@ -190,7 +189,7 @@ New-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer
 # * SystemControl RightClick                                                      *
 # *********************************************************************************
 #ADD Systemcontrol to rightClick on Desktop
-eventlog -status "INFO" -message "Start-Windows10 OSConfig Add SystemControl RightClick" -EventlogName $NameEventlog -EventlogSource $NameEventSource
+
 New-Item -Path 'HKCR:\DesktopBackground\Shell' -Name 'Systemsteuerung' 
 New-ItemProperty -Path 'HKCR:\DesktopBackground\Shell\Systemsteuerung' -Name '(default)' -Value '@shell32.dll,-4161'
 New-ItemProperty -Path 'HKCR:\DesktopBackground\Shell\Systemsteuerung' -Name 'icon' -Value 'control.exe'
