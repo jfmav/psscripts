@@ -100,7 +100,7 @@ $error.Clear()
 #get-wmiobject Win32_NTDomain --> very slow
 #get rodc information over "nltest" Domain testing tool builedin 
 eventlog -status "INFO" -message "Start-Windows10 Query RODC" -EventlogName $NameEventlog -EventlogSource $NameEventSource
-$dclist = nltest /dclist:mapeigroup
+$dclist = nltest /dclist:DomainName
 $getcurrentsite=nltest /dsgetsite
 $searchsiteindclist=$dclist -like ("*"+$getcurrentsite[0]+"*")
 [string]$RODC_Name=$searchsiteindclist.trim().substring(0,25)
