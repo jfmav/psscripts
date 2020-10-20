@@ -209,7 +209,7 @@ Get-WmiObject Win32_Share -Property * | select name,type | Where-Object { $_.Typ
 #remove online apps
 #Neue Version da alte Fehler wirft:
 write-host "Entferne Online Applikationen ohne WindowsStore,WindowsCalculator,WindowsPhotos,MicrosoftStickyNotes" -ForegroundColor Gray
-$onlineapps=Get-AppxProvisionedPackage -Online | where {$_.PackageName -NotLike "*Microsoft.WindowsStore*" -AND $_.PackageName -NotLike "*Microsoft.WindowsCalculator*" -AND $_.PackageName -NotLike "*Microsoft.*StickyNotes*" -AND $_.PackageName -NotLike "*Microsoft.RemoteDesktop*" -AND $_.PackageName -NotLike "*Microsoft.MSPaint*" -AND $_.PackageName -NotLike "*Microsoft.Windows.Photos*"}
+$onlineapps=Get-AppxProvisionedPackage -Online | where {$_.PackageName -NotLike "*Microsoft.WindowsStore*" -AND $_.PackageName -NotLike "*Microsoft.Store*" -AND $_.PackageName -NotLike "*Microsoft.WindowsCalculator*" -AND $_.PackageName -NotLike "*Microsoft.*StickyNotes*" -AND $_.PackageName -NotLike "*Microsoft.RemoteDesktop*" -AND $_.PackageName -NotLike "*Microsoft.MSPaint*" -AND $_.PackageName -NotLike "*Microsoft.Windows.Photos*"-AND $_.PackageName -NotLike "*Microsoft.WindowsCamera*"-AND $_.PackageName -NotLike "*Windows.PrintDialog*"}
 
 #wait
 $onlineapps | Out-Null
@@ -227,7 +227,7 @@ Write-host ""
 
 #config:AppXPackages 
 #second start because not all will be disabled
-$onlineapps=Get-AppxProvisionedPackage -Online | where {$_.PackageName -NotLike "*Microsoft.WindowsStore*" -AND $_.PackageName -NotLike "*Microsoft.WindowsCalculator*" -AND $_.PackageName -NotLike "*Microsoft.*StickyNotes*" -AND $_.PackageName -NotLike "*Microsoft.RemoteDesktop*" -AND $_.PackageName -NotLike "*Microsoft.MSPaint*" -AND $_.PackageName -NotLike "*Microsoft.Windows.Photos*"}
+$onlineapps=Get-AppxProvisionedPackage -Online | where {$_.PackageName -NotLike "*Microsoft.WindowsStore*" -AND $_.PackageName -NotLike "*Microsoft.Store*" -AND $_.PackageName -NotLike "*Microsoft.WindowsCalculator*" -AND $_.PackageName -NotLike "*Microsoft.*StickyNotes*" -AND $_.PackageName -NotLike "*Microsoft.RemoteDesktop*" -AND $_.PackageName -NotLike "*Microsoft.MSPaint*" -AND $_.PackageName -NotLike "*Microsoft.Windows.Photos*"-AND $_.PackageName -NotLike "*Microsoft.WindowsCamera*"-AND $_.PackageName -NotLike "*Windows.PrintDialog*"}
 
 #wait
 $onlineapps | Out-Null
@@ -235,6 +235,23 @@ foreach ($Apps in $onlineapps) {
 Write-host "Entferne Applikation: "$Apps.PackageName -ForegroundColor Gray
 Remove-AppxProvisionedPackage -Online -Packagename $Apps.Packagename -erroraction silentlycontinue
 Get-AppxPackage -AllUsers "$Apps.PackageName" | where {} | Remove-AppxPackage -AllUsers -erroraction silentlycontinue
+Start-Sleep -Seconds 2
+}
+
+#wait
+Start-Sleep -Seconds 120
+Write-Host ""
+Write-host ""
+
+#config:AppXPackages 
+#delete currentuser Apps
+$onlineapps=Get-AppxPackage | where {$_.Name -NotLike "*Microsoft.WindowsStore*" -AND $_.Name -NotLike "*Microsoft.Store*" -AND $_.Name -NotLike "*Microsoft.WindowsCalculator*" -AND $_.Name -NotLike "*Microsoft.*StickyNotes*" -AND $_.Name -NotLike "*Microsoft.RemoteDesktop*" -AND $_.Name -NotLike "*Microsoft.MSPaint*" -AND $_.Name -NotLike "*Microsoft.Windows.Photos*" -AND $_.Name -NotLike "*Microsoft.WindowsCamera*"-AND $_.Name -NotLike "*Windows.PrintDialog*"}
+
+#wait
+$onlineapps | Out-Null
+foreach ($Apps in $onlineapps) {
+Write-host "Entferne Applikation: "$Apps.Name -ForegroundColor Gray
+Remove-AppxPackage -Package $Apps.name -erroraction silentlycontinue
 Start-Sleep -Seconds 2
 }
 # *********************************************************************************
