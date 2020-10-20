@@ -200,7 +200,7 @@ New-ItemProperty -Path 'HKCR:\DesktopBackground\Shell\Systemsteuerung\command' -
 # *********************************************************************************
 # * Delete AdminShares                                                            *
 # *********************************************************************************
-Get-WmiObject Win32_Share -Property * | select name,type | Where-Object { $_.Type -like "*48" } | ForEach-Object {$_.Delete()}
+Get-WmiObject Win32_Share -Property * | select name,type | Where-Object { $_.Type -like "*48" } | ForEach {net share $_.name /delete}
 
 
 # *********************************************************************************
