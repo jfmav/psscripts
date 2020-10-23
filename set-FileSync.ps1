@@ -1,6 +1,6 @@
 $privatenetworkshare="\\servername\sharename"
 # *********************************************************************************
-# * Funktion - Sync DATA 2 Wege                                                   *
+# * Funktion - Sync DATA 2 Ways                                                   *
 # *********************************************************************************
 function Start-FileSync2Ways() {
 param([string]$source,[string]$dest,[string]$File)
